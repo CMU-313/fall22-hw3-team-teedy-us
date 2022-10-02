@@ -18,8 +18,9 @@
     <button class="btn btn-danger" ng-show="document.writable" ng-click="deleteDocument(document)"><span class="fas fa-trash"></span> {{ 'delete' | translate }}</button>
     <a href="#/document/edit/{{ document.id }}" ng-show="document.writable" class="btn btn-primary"><span class="fas fa-pencil-alt"></span> {{ 'edit' | translate }}</a>
   </div>
-
+  
   <div class="pull-right dropdown" uib-dropdown>
+    &nbsp;
     <button class="btn btn-default" uib-dropdown-toggle>
       <span class="fas fa-cloud-download-alt"></span>
       {{ 'export' | translate }}
@@ -41,7 +42,21 @@
     </ul>
     &nbsp;
   </div>
-
+  <div class="pull-right">
+    <select class="btn btn-default" id="rating">
+      <option value="rate" selected>Rate</option>
+      <option value="1">1/10</option>
+      <option value="2">2/10</option>
+      <option value="3">3/10</option>
+      <option value="4">4/10</option>
+      <option value="5">5/10</option>
+      <option value="6">6/10</option>
+      <option value="7">7/10</option>
+      <option value="8">8/10</option>
+      <option value="9">9/10</option>
+      <option value="10">10/10</option>
+    </select>
+  </div>
 	<div class="page-header">
 	  <h1>
       {{ document.title }}
