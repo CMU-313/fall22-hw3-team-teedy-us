@@ -81,6 +81,12 @@ public class TestDocumentResource extends BaseJerseyTest {
                         .param("create_date", Long.toString(create1Date))), JsonObject.class);
         String document1Id = json.getString("id");
         Assert.assertNotNull(document1Id);
+
+        // See if Document Reviewers for document 1 exists
+        JsonArray reviewers = json.getJsonArray("reviewers");
+        Assert.assertEquals(4, reviewers.size());
+        Assert.assertEquals("spencer", reviewers.getJsonObject(0).getString("userId"));
+        Assert.assertEquals(document1Id, reviewers.getJsonObject(1).getString("documentId"));
         
         // Create a document with document1
         json = target().path("/document").request()

@@ -19,6 +19,7 @@ import com.sismics.docs.core.model.context.AppContext;
 import com.sismics.docs.core.model.jpa.Document;
 import com.sismics.docs.core.model.jpa.File;
 import com.sismics.docs.core.model.jpa.User;
+import com.sismics.docs.core.model.jpa.DocumentReviewer;
 import com.sismics.docs.core.util.*;
 import com.sismics.docs.core.util.jpa.PaginatedList;
 import com.sismics.docs.core.util.jpa.PaginatedLists;
@@ -779,6 +780,34 @@ public class DocumentResource extends BaseResource {
         // Save the document, create the base ACLs
         document = DocumentUtil.createDocument(document, principal.getId());
 
+        // Create the document reviewer (test document reviewer based off of Spencer)
+        DocumentReviewerDao docRevDao1 = new DocumentReviewerDao();
+        DocumentReviewer docRev1 = new DocumentReviewer();
+        docRev1.setUserId("spencer");
+        docRev1.setDocumentId(document.getId());
+        String docRevId1 = docRevDao1.create(docRev1, "spencer", document.getId());
+
+        // Create the document reviewer (test document reviewer based off of Hanna)
+        DocumentReviewerDao docRevDao2 = new DocumentReviewerDao();
+        DocumentReviewer docRev2 = new DocumentReviewer();
+        docRev1.setUserId("hanna");
+        docRev1.setDocumentId(document.getId());
+        String docRevId2 = docRevDao2.create(docRev2, "hanna", document.getId());
+
+        // Create the document reviewer (test document reviewer based off of Jennifer)
+        DocumentReviewerDao docRevDao3 = new DocumentReviewerDao();
+        DocumentReviewer docRev3 = new DocumentReviewer();
+        docRev1.setUserId("jennifer");
+        docRev1.setDocumentId(document.getId());
+        String docRevId3 = docRevDao3.create(docRev3, "jennifer", document.getId());
+
+        // Create the document reviewer (test document reviewer based off of Anesha)
+        DocumentReviewerDao docRevDao4 = new DocumentReviewerDao();
+        DocumentReviewer docRev4 = new DocumentReviewer();
+        docRev1.setUserId("anesha");
+        docRev1.setDocumentId(document.getId());
+        String docRevId4 = docRevDao4.create(docRev4, "anesha", document.getId());
+
         // Update tags
         updateTagList(document.getId(), tagList);
 
@@ -798,8 +827,34 @@ public class DocumentResource extends BaseResource {
         documentCreatedAsyncEvent.setDocumentId(document.getId());
         ThreadLocalContext.get().addAsyncEvent(documentCreatedAsyncEvent);
 
+        JsonArrayBuilder reviewers = Json.createArrayBuilder();
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId1)
+                    .add("userId", "spencer")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));
+
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId2)
+                    .add("userId", "hanna")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));        
+        
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId3)
+                    .add("userId", "jennifer")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));
+        
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId4)
+                    .add("userId", "anesha")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));
+
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("id", document.getId());
+                .add("id", document.getId())
+                .add("reviewers", reviewers);
         return Response.ok().entity(response.build()).build();
     }
     

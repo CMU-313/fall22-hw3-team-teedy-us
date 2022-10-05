@@ -1,0 +1,5 @@
+insert into T_USER(USE_ID_C, USE_IDROLE_C, USE_USERNAME_C, USE_PASSWORD_C, USE_EMAIL_C, USE_CREATEDATE_D, USE_PRIVATEKEY_C) values('spencer', 'user', 'spencer', '', 'spencer@localhost', NOW(), 'SpencerPk');
+insert into T_USER(USE_ID_C, USE_IDROLE_C, USE_USERNAME_C, USE_PASSWORD_C, USE_EMAIL_C, USE_CREATEDATE_D, USE_PRIVATEKEY_C) values('hanna', 'user', 'hanna', '', 'hanna@localhost', NOW(), 'HannaPk');
+insert into T_USER(USE_ID_C, USE_IDROLE_C, USE_USERNAME_C, USE_PASSWORD_C, USE_EMAIL_C, USE_CREATEDATE_D, USE_PRIVATEKEY_C) values('jennifer', 'user', 'jennifer', '', 'jennifer@localhost', NOW(), 'JenniferPk');
+insert into T_USER(USE_ID_C, USE_IDROLE_C, USE_USERNAME_C, USE_PASSWORD_C, USE_EMAIL_C, USE_CREATEDATE_D, USE_PRIVATEKEY_C) values('anesha', 'user', 'anesha', '', 'anesha@localhost', NOW(), 'AneshaPk');
+update T_CONFIG set CFG_VALUE_C = '29' where CFG_ID_C = 'DB_VERSION';
