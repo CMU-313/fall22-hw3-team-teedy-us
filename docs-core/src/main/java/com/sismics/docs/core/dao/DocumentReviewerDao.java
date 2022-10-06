@@ -5,11 +5,10 @@ import com.sismics.docs.core.dao.dto.DocumentReviewerDto;
 import com.sismics.docs.core.model.jpa.User;
 import com.sismics.docs.core.model.jpa.Document;
 import com.sismics.util.context.ThreadLocalContext;
-import com.sismics.docs.core.util.AuditLogUtil;
-import com.sismics.docs.core.constant.AuditLogType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,6 +44,24 @@ public class DocumentReviewerDao {
         // AuditLogUtil.create(docRev, AuditLogType.CREATE, userId);
 
         return docRev.getId();
+    }
+
+    /**
+     * Gets an active document by its ID.
+     * 
+     * @param id Document ID
+     * @return Document
+     */
+    public DocumentReviewer findById(String id) {
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createQuery("select t from DocumentReviewer t where t.id = :id");
+        q.setParameter("id", id);
+        try {
+            DocumentReviewer docRevDb = (DocumentReviewer) q.getSingleResult();
+            return docRevDb;
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     /**
@@ -116,11 +133,11 @@ public class DocumentReviewerDao {
      * @param score new score to be updated
      * @return updated documentReviewer
      */
-    public DocumentReviewer updateScore(DocumentReviewer docRev, String userId) {
+    public DocumentReviewer update(DocumentReviewer docRev, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the tag
-        Query q = em.createQuery("select t from T_DOCUMENT_REVIEWER where t.id = :id");
+        Query q = em.createQuery("select t from DocumentReviewer t where t.id = :id");
         q.setParameter("id", docRev.getId());
         DocumentReviewer docRevDb = (DocumentReviewer) q.getSingleResult();
         

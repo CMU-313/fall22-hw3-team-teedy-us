@@ -279,6 +279,13 @@ public class DocumentResource extends BaseResource {
             document.add("files", filesArrayBuilder);
         }
 
+        DocumentReviewerDao drdao = new DocumentReviewerDao();
+        List<DocumentReviewerDto> drs = drdao.findByDocumentId(documentId);
+        document.add("score1", drs.get(0).getScore());
+        document.add("score2", drs.get(1).getScore());
+        document.add("score3", drs.get(2).getScore());
+        document.add("score4", drs.get(3).getScore());
+
         return Response.ok().entity(document.build()).build();
     }
     
@@ -769,7 +776,6 @@ public class DocumentResource extends BaseResource {
 
         // Create the document
         Document document = new Document();
-        DocumentReviewer dr = new DocumentReviewer();
         document.setUserId(principal.getId());
         document.setTitle(title);
         document.setDescription(description);
@@ -782,12 +788,7 @@ public class DocumentResource extends BaseResource {
         document.setCoverage(coverage);
         document.setRights(rights);
         document.setLanguage(language);
-        //added setScore method to set the 4 scores from reviewers
-        dr.setDocumentId(document.getId());
-        dr.setScore(score1);
-        dr.setScore(score2);
-        dr.setScore(score3);
-        dr.setScore(score4);
+        
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
@@ -839,39 +840,9 @@ public class DocumentResource extends BaseResource {
         }
 
         // Raise a document created event
-        DocumentCreatedAsyncEvent documentCreatedAsyncEvent = new DocumentCreatedAsyncEvent();
-        documentCreatedAsyncEvent.setUserId(principal.getId());
-        documentCreatedAsyncEvent.setDocumentId(document.getId());
-        ThreadLocalContext.get().addAsyncEvent(documentCreatedAsyncEvent);
-
-        JsonArrayBuilder reviewers = Json.createArrayBuilder();
-        reviewers.add(Json.createObjectBuilder()
-                    .add("id", docRevId1)
-                    .add("userId", "spencer")
-                    .add("documentId", document.getId())
-                    .add("score", "None"));
-
-        reviewers.add(Json.createObjectBuilder()
-                    .add("id", docRevId2)
-                    .add("userId", "hanna")
-                    .add("documentId", document.getId())
-                    .add("score", "None"));        
-        
-        reviewers.add(Json.createObjectBuilder()
-                    .add("id", docRevId3)
-                    .add("userId", "jennifer")
-                    .add("documentId", document.getId())
-                    .add("score", "None"));
-        
-        reviewers.add(Json.createObjectBuilder()
-                    .add("id", docRevId4)
-                    .add("userId", "anesha")
-                    .add("documentId", document.getId())
-                    .add("score", "None"));
-
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("id", document.getId())
-                .add("reviewers", reviewers);
+                .add("id", document.getId());
+
         return Response.ok().entity(response.build()).build();
     }
     
@@ -930,10 +901,10 @@ public class DocumentResource extends BaseResource {
             @FormParam("language") String language,
             @FormParam("create_date") String createDateStr,
             //added form params for scores 1 through 4
-            @FormParam("score 1") Integer score1,
-            @FormParam("score 2") Integer score2,
-            @FormParam("score 3") Integer score3,
-            @FormParam("score 4") Integer score4) {
+            @FormParam("score1") Integer score1,
+            @FormParam("score2") Integer score2,
+            @FormParam("score3") Integer score3,
+            @FormParam("score4") Integer score4) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -967,10 +938,6 @@ public class DocumentResource extends BaseResource {
         if (document == null) {
             throw new NotFoundException();
         }
-
-        DocumentReviewerDao drdao = new DocumentReviewerDao();
-        List<DocumentReviewerDto> drlist = drdao.findByDocumentId(document.getId());
-        DocumentReviewerDto dr = drlist.get(0);
         
         // Update the document
         document.setTitle(title);
@@ -984,11 +951,37 @@ public class DocumentResource extends BaseResource {
         document.setCoverage(coverage);
         document.setRights(rights);
         document.setLanguage(language);
+
         //added setScore method to set the 4 scores from reviewers
-        dr.setScore(score1);
-        dr.setScore(score2);
-        dr.setScore(score3);
-        dr.setScore(score4);
+        DocumentReviewerDao drdao = new DocumentReviewerDao();
+        List<DocumentReviewerDto> drlist = drdao.findByDocumentId(document.getId());
+
+        if (score1 != null) {
+            DocumentReviewerDao drdao1 = new DocumentReviewerDao();
+            DocumentReviewer dr1 = drdao1.findById(drlist.get(0).getId());
+            dr1.setScore(score1);
+            drdao1.update(dr1, principal.getId());
+        }
+        if (score2 != null) {
+            DocumentReviewerDao drdao2 = new DocumentReviewerDao();
+            DocumentReviewer dr2 = drdao2.findById(drlist.get(1).getId());
+            dr2.setScore(score2);
+            drdao2.update(dr2, principal.getId());
+        }
+        if (score3 != null) {
+            DocumentReviewerDao drdao3 = new DocumentReviewerDao();
+            DocumentReviewer dr3 = drdao3.findById(drlist.get(2).getId());
+            dr3.setScore(score3);
+            drdao3.update(dr3, principal.getId());
+        }
+        if (score4 != null) {
+            DocumentReviewerDao drdao4 = new DocumentReviewerDao();
+            DocumentReviewer dr4 = drdao4.findById(drlist.get(3).getId());
+            dr4.setScore(score4);
+            drdao4.update(dr4, principal.getId());
+        }
+
+
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
