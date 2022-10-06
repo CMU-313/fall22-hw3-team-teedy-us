@@ -769,6 +769,7 @@ public class DocumentResource extends BaseResource {
 
         // Create the document
         Document document = new Document();
+        DocumentReviewer dr = new DocumentReviewer(); 
         document.setUserId(principal.getId());
         document.setTitle(title);
         document.setDescription(description);
@@ -782,10 +783,10 @@ public class DocumentResource extends BaseResource {
         document.setRights(rights);
         document.setLanguage(language);
         //added setScore method to set the 4 scores from reviewers
-        DocumentReviewer.setScore(score1);
-        DocumentReviewer.setScore(score2);
-        DocumentReviewer.setScore(score3);
-        DocumentReviewer.setScore(score4);
+        dr.setScore(score1);
+        dr.setScore(score2);
+        dr.setScore(score3);
+        dr.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
@@ -925,10 +926,10 @@ public class DocumentResource extends BaseResource {
         document.setRights(rights);
         document.setLanguage(language);
         //added setScore method to set the 4 scores from reviewers
-        DocumentReviewer.setScore(score1);
-        DocumentReviewer.setScore(score2);
-        DocumentReviewer.setScore(score3);
-        DocumentReviewer.setScore(score4);
+        dr.setScore(score1);
+        dr.setScore(score2);
+        dr.setScore(score3);
+        dr.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
