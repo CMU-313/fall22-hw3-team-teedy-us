@@ -6,7 +6,7 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 ![Coverage](https://raw.githubusercontent.com/CMU-313/Teedy/badges/badges/jacoco.svg?token=GHSAT0AAAAAABYAA6NCYJCAXNYCQUUBMWB6YYKLW2Q)
 
-<h1>
+<h3>
 In order to user test our feature, please follow the procedures below:
   1) Add a new document to the system.
   2) Once the document has been added, go to the Permissions tab and add the following users with 'WRITE' access
@@ -20,7 +20,7 @@ In order to user test our feature, please follow the procedures below:
   6) Input the score in the score1 field and save.
   7) The score should be displayed in the content section of the document.
   8) Repeat Steps 3-6 to add scores with other users. Note: Please add the scores in the order of the number.
-</h1>
+</h3>
 
 Teedy is an open source, lightweight document management system for individuals and businesses.
 
