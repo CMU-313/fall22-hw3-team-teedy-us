@@ -17,6 +17,7 @@ import com.sismics.docs.core.event.DocumentUpdatedAsyncEvent;
 import com.sismics.docs.core.event.FileDeletedAsyncEvent;
 import com.sismics.docs.core.model.context.AppContext;
 import com.sismics.docs.core.model.jpa.Document;
+import com.sismics.docs.core.model.jpa.DocumentReviewer;
 import com.sismics.docs.core.model.jpa.File;
 import com.sismics.docs.core.model.jpa.User;
 import com.sismics.docs.core.util.*;
@@ -781,10 +782,10 @@ public class DocumentResource extends BaseResource {
         document.setRights(rights);
         document.setLanguage(language);
         //added setScore method to set the 4 scores from reviewers
-        document.setScore(score1);
-        document.setScore(score2);
-        document.setScore(score3);
-        document.setScore(score4);
+        DocumentReviewer.setScore(score1);
+        DocumentReviewer.setScore(score2);
+        DocumentReviewer.setScore(score3);
+        DocumentReviewer.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
@@ -924,10 +925,10 @@ public class DocumentResource extends BaseResource {
         document.setRights(rights);
         document.setLanguage(language);
         //added setScore method to set the 4 scores from reviewers
-        document.setScore(score1);
-        document.setScore(score2);
-        document.setScore(score3);
-        document.setScore(score4);
+        DocumentReviewer.setScore(score1);
+        DocumentReviewer.setScore(score2);
+        DocumentReviewer.setScore(score3);
+        DocumentReviewer.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
