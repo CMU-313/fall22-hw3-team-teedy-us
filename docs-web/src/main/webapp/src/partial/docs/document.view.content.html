@@ -16,6 +16,15 @@
   <dd ng-if="document.coverage">{{ document.coverage }}</dd>
   <dt ng-if="document.rights">{{ 'document.rights' | translate }}</dt>
   <dd ng-if="document.rights">{{ document.rights }}</dd>
+  <dt ng-if="document.score1">{{ 'score1'}}</dt>
+  <dd ng-if="document.score1">{{ document.score1 }}</dd>
+  <dt ng-if="document.score2">{{ 'score2' }}</dt>
+  <dd ng-if="document.score2">{{ document.score2 }}</dd>
+  <dt ng-if="document.score3">{{ 'score3' }}</dt>
+  <dd ng-if="document.score3">{{ document.score3 }}</dd>
+  <dt ng-if="document.score4">{{ 'score4' }}</dt>
+  <dd ng-if="document.score4">{{ document.score4 }}</dd>
+  
   <dt>{{ 'document.contributors' | translate }}</dt>
   <dd>
     <span ng-repeat="contributor in document.contributors">
