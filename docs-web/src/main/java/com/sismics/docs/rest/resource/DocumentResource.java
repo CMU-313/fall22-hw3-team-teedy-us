@@ -716,6 +716,11 @@ public class DocumentResource extends BaseResource {
      * @param metadataValueList Metadata value list
      * @param language Language
      * @param createDateStr Creation date
+     *added the following 4 lines to implement scores in the form
+     * @param score1 reviewer score 1
+     * @param score2 reviewer score 2
+     * @param score3 reviewer score 3
+     * @param score3 reviewer score 3
      * @return Response
      */
     @PUT
@@ -735,7 +740,12 @@ public class DocumentResource extends BaseResource {
             @FormParam("metadata_id") List<String> metadataIdList,
             @FormParam("metadata_value") List<String> metadataValueList,
             @FormParam("language") String language,
-            @FormParam("create_date") String createDateStr) {
+            @FormParam("create_date") String createDateStr,
+            //added form params for scores 1 through 4
+            @FormParam("score 1") Integer score1,
+            @FormParam("score 2") Integer score2,
+            @FormParam("score 3") Integer score3,
+            @FormParam("score 4") Integer score4) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -771,6 +781,11 @@ public class DocumentResource extends BaseResource {
         document.setCoverage(coverage);
         document.setRights(rights);
         document.setLanguage(language);
+        //added setScore method to set the 4 scores from reviewers
+        document.setScore(score1);
+        document.setScore(score2);
+        document.setScore(score3);
+        document.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
@@ -911,7 +926,12 @@ public class DocumentResource extends BaseResource {
             @FormParam("metadata_id") List<String> metadataIdList,
             @FormParam("metadata_value") List<String> metadataValueList,
             @FormParam("language") String language,
-            @FormParam("create_date") String createDateStr) {
+            @FormParam("create_date") String createDateStr,
+            //added form params for scores 1 through 4
+            @FormParam("score 1") Integer score1,
+            @FormParam("score 2") Integer score2,
+            @FormParam("score 3") Integer score3,
+            @FormParam("score 4") Integer score4) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -958,6 +978,11 @@ public class DocumentResource extends BaseResource {
         document.setCoverage(coverage);
         document.setRights(rights);
         document.setLanguage(language);
+        //added setScore method to set the 4 scores from reviewers
+        document.setScore(score1);
+        document.setScore(score2);
+        document.setScore(score3);
+        document.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
