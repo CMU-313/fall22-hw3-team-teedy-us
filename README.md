@@ -10,10 +10,7 @@
 In order to user test our feature, please follow the procedures below:
   1) Add a new document to the system.
   2) Once the document has been added, go to the Permissions tab and add the following users with 'WRITE' access
-      -spencer
-      -hanna
-      -jennifer
-      -anesha
+      spencer,hanna,jennifer,anesha
   3) Now logout and login with any of the users listed above. The username is just the name and the password is "admin."
   4) Once logged in, go to the added document and click edit document.
   5) Scroll down to the additional metadata section and open the drop-down menu. You should be able to see input fields for score1, score2, score3, and score4. 
