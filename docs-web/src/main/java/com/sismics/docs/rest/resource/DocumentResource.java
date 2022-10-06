@@ -742,10 +742,10 @@ public class DocumentResource extends BaseResource {
             @FormParam("language") String language,
             @FormParam("create_date") String createDateStr,
             //added form params for scores 1 through 4
-            @FormParam("score 1") Integer score1,
-            @FormParam("score 2") Integer score2,
-            @FormParam("score 3") Integer score3,
-            @FormParam("score 4") Integer score4) {
+            @FormParam("score1") Integer score1,
+            @FormParam("score2") Integer score2,
+            @FormParam("score3") Integer score3,
+            @FormParam("score4") Integer score4) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -769,6 +769,7 @@ public class DocumentResource extends BaseResource {
 
         // Create the document
         Document document = new Document();
+        DocumentReviewer dr = new DocumentReviewer();
         document.setUserId(principal.getId());
         document.setTitle(title);
         document.setDescription(description);
@@ -782,10 +783,11 @@ public class DocumentResource extends BaseResource {
         document.setRights(rights);
         document.setLanguage(language);
         //added setScore method to set the 4 scores from reviewers
-        document.setScore(score1);
-        document.setScore(score2);
-        document.setScore(score3);
-        document.setScore(score4);
+        dr.setDocumentId(document.getId());
+        dr.setScore(score1);
+        dr.setScore(score2);
+        dr.setScore(score3);
+        dr.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
@@ -965,6 +967,10 @@ public class DocumentResource extends BaseResource {
         if (document == null) {
             throw new NotFoundException();
         }
+
+        DocumentReviewerDao drdao = new DocumentReviewerDao();
+        List<DocumentReviewerDto> drlist = drdao.findByDocumentId(document.getId());
+        DocumentReviewerDto dr = drlist.get(0);
         
         // Update the document
         document.setTitle(title);
@@ -979,10 +985,10 @@ public class DocumentResource extends BaseResource {
         document.setRights(rights);
         document.setLanguage(language);
         //added setScore method to set the 4 scores from reviewers
-        document.setScore(score1);
-        document.setScore(score2);
-        document.setScore(score3);
-        document.setScore(score4);
+        dr.setScore(score1);
+        dr.setScore(score2);
+        dr.setScore(score3);
+        dr.setScore(score4);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
