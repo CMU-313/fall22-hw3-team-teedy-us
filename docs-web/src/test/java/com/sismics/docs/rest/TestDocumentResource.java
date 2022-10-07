@@ -279,33 +279,33 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertEquals(4, json.getInt("score4"));
 
         //testing if score updates work
-        int score1 = 1;
+        int score1 = 10;
         DocumentReviewerDao drdao1 = new DocumentReviewerDao();
         DocumentReviewer dr1 = drdao1.findById(drlist.get(0).getId());
         dr1.setScore(score1);
         drdao1.update(dr1, principal.getId());
-        Assert.assertEquals(1, json.getInt("score1"));
+        Assert.assertEquals(10, json.getInt("score1"));
 
-        int score2 = 2;
+        int score2 = 20;
         DocumentReviewerDao drdao2 = new DocumentReviewerDao();
         DocumentReviewer dr2 = drdao2.findById(drlist.get(1).getId());
         dr2.setScore(score2);
         drdao2.update(dr2, principal.getId());
-        Assert.assertEquals(2, json.getInt("score2"));
+        Assert.assertEquals(20, json.getInt("score2"));
 
-        int score3 = 3;
+        int score3 = 30;
         DocumentReviewerDao drdao3 = new DocumentReviewerDao();
         DocumentReviewer dr3 = drdao3.findById(drlist.get(2).getId());
         dr3.setScore(score3);
         drdao3.update(dr3, principal.getId());
-        Assert.assertEquals(3, json.getInt("score3"));
+        Assert.assertEquals(30, json.getInt("score3"));
 
-        int score4 = 4;
+        int score4 = 40;
         DocumentReviewerDao drdao4 = new DocumentReviewerDao();
         DocumentReviewer dr4 = drdao4.findById(drlist.get(3).getId());
         dr4.setScore(score4);
         drdao4.update(dr4, principal.getId());
-        Assert.assertEquals(4, json.getInt("score4"));
+        Assert.assertEquals(40, json.getInt("score4"));
         //end of score update testing
 
         // Get document 2
