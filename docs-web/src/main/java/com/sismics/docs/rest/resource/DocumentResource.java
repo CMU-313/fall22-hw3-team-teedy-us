@@ -839,9 +839,35 @@ public class DocumentResource extends BaseResource {
             throw new ClientException("ValidationError", e.getMessage());
         }
 
-        // Raise a document created event
+        // Add reviewers to JSON so we can test to see if it was successfully created
+        JsonArrayBuilder reviewers = Json.createArrayBuilder();
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId1)
+                    .add("userId", "spencer")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));
+
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId2)
+                    .add("userId", "hanna")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));        
+
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId3)
+                    .add("userId", "jennifer")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));
+
+        reviewers.add(Json.createObjectBuilder()
+                    .add("id", docRevId4)
+                    .add("userId", "anesha")
+                    .add("documentId", document.getId())
+                    .add("score", "None"));
+
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("id", document.getId());
+                .add("id", document.getId())
+                .add("reviewers", reviewers);
 
         return Response.ok().entity(response.build()).build();
     }
