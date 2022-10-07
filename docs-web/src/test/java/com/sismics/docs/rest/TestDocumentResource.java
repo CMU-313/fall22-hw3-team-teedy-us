@@ -273,10 +273,6 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertFalse(relations.getJsonObject(0).getBoolean("source"));
         Assert.assertEquals("My super title document 2", relations.getJsonObject(0).getString("title"));
         Assert.assertFalse(json.containsKey("files"));
-        Assert.assertEquals(1, json.getInt("score1"));
-        Assert.assertEquals(2, json.getInt("score2"));
-        Assert.assertEquals(3, json.getInt("score3"));
-        Assert.assertEquals(4, json.getInt("score4"));
 
         // Get document 2
         json = target().path("/document/" + document2Id).request()
