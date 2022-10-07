@@ -278,6 +278,13 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertEquals(3, json.getInt("score3"));
         Assert.assertEquals(4, json.getInt("score4"));
 
+        //testing if score updates work
+        DocumentReviewerDao drdao1 = new DocumentReviewerDao();
+        DocumentReviewer dr1 = drdao1.findById(drlist.get(0).getId());
+        dr1.setScore(50);
+        drdao1.update(dr1, principal.getId());
+        Assert.assertEquals(50, json.getInt("score1"));
+
         // Get document 2
         json = target().path("/document/" + document2Id).request()
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, document1Token)
