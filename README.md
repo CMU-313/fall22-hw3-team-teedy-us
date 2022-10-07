@@ -8,15 +8,24 @@
 
 <h1>User Testing Instructions</h1>
 In order to user test our feature, please follow the procedures below:
-  1) Add a new document to the system.
-  2) Once the document has been added, go to the Permissions tab and add the following users with 'WRITE' access
-      spencer,hanna,jennifer,anesha
-  3) Now logout and login with any of the users listed above. The username is just the name and the password is "admin."
-  4) Once logged in, go to the added document and click edit document.
-  5) Scroll down to the additional metadata section and open the drop-down menu. You should be able to see input fields for score1, score2, score3, and score4. 
-  6) Input the score in the score1 field and save.
-  7) The score should be displayed in the content section of the document.
-  8) Repeat Steps 3-6 to add scores with other users. Note: Please add the scores in the order of the number.
+
+1) Add a new document to the system.
+
+2) Once the document has been added, go to the Permissions tab and add the following users with 'WRITE' access
+
+spencer, hanna, jennifer, anesha
+
+3) Now logout and login with any of the users listed above. The username is just the name and the password is "admin."
+
+4) Once logged in, go to the added document and click edit document.
+
+5) Scroll down to the additional metadata section and open the drop-down menu. You should be able to see input fields for score1, score2, score3, and score4. 
+
+6) Input the score in the score1 field and save.
+
+7) The score should be displayed in the content section of the document.
+
+8) Repeat Steps 3-6 to add scores with other users. Note: Please add the scores in the order of the number.
 
 
 Teedy is an open source, lightweight document management system for individuals and businesses.
